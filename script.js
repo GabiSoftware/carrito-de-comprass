@@ -438,12 +438,31 @@ function mostrarModalVaciarCarrito() {
 
 // Función para mostrar modal de login (placeholder)
 function mostrarModalLogin() {
+    let username = "";
+    let password = "";
+
     mostrarModal({
         icono: '👤',
         titulo: 'Iniciar Sesión',
-        mensaje: 'Funcionalidad de login en desarrollo.\n\nPronto podrás:\n• Guardar tu carrito\n• Ver historial de compras\n• Gestionar tus datos\n• Recibir ofertas exclusivas',
-        textoConfirmar: 'Entendido',
-        textoCancel: '',
-        onConfirmar: null
+        mensaje: `
+            <label for="login-username">Usuario:</label>
+            <input id="login-username" type="text" placeholder="Ingresa tu usuario" style="width:100%; padding:5px; margin:5px 0;">
+            
+            <label for="login-password">Contraseña:</label>
+            <input id="login-password" type="password" placeholder="Ingresa tu contraseña" style="width:100%; padding:5px; margin:5px 0;">
+        `,
+        textoConfirmar: 'Ingresar',
+        textoCancel: 'Cancelar',
+        onConfirmar: () => {
+            username = document.getElementById('login-username').value;
+            password = document.getElementById('login-password').value;
+
+            if (username === "admin" && password === "1234") {
+                mostrarMensaje(`Bienvenido ${username}`);
+                document.querySelector('.login-text').textContent = `Hola, ${username}`;
+            } else {
+                mostrarMensaje("Usuario o contraseña incorrectos");
+            }
+        }
     });
 }
